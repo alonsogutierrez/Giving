@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block main %}
+
+<head>
+    <title>Obsequiemos!</title>
+</head>
+
+<div id="content">
+
+    <div id="hot">
+
+        <!-- *** ADVANTAGES HOMEPAGE ***
+_________________________________________________________ -->
+        <div id="advantages">
+
+            <div class="container">
+                <div class="same-height-row">
+                    <div class="col-sm-4">
+                        <div class="box same-height clickable">
+                            <div class="icon"><i class="fa fa-heart"></i>
+                            </div>
+
+                            <h3><a href="#">Cantidad de obsequios realizados</a></h3>
+                            <p>La cantidad total de <strong>obsequios realizados</strong> hasta la fecha son: <strong>{{ realized_posts_count }}</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="box same-height clickable">
+                            <div class="icon"><i class="fa fa-tags"></i>
+                            </div>
+
+                            <h3><a href="#">Cantidad de obsequios disponibles</a></h3>
+                            <p>La cantidad de <strong>obsequios disponibles</strong> para postular son: <strong>{{ posts_count }}</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="box same-height clickable">
+                            <div class="icon"><i class="fa fa-thumbs-up"></i>
+                            </div>
+
+                            <h3><a href="#">Cantidad de obsequios realizados durante la última semana</a></h3>
+                            <p>La cantidad de <strong>obsequios durante la última semana</strong> son: <strong>{{ count_last_week_post }}</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container -->
+
+        </div>
+        <!-- /#advantages -->
+
+        <!-- *** ADVANTAGES END *** -->
+
+
+        <div class="box">
+            <div class="container">
+                <div class="col-md-12">
+                    <h2>Los más recientes de la semana</h2>
+                </div>
+            </div>
+        </div>
+
+        {% if posts %}
+        <div class="container">
+
+            <div class="product-slider">
+                {% for post in posts %}
+                {% if post.state == True %}
+                <div class="item">
+                    <div class="product">
+                        <div class="flip-container">
+                            <div class="flipper">
+                                <div class="front">
+                                    <a href="/post/{{ post.id }}">
+                                        <img src="media/{{ post.picture.picture }}" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="back">
+                                    <a href="/post/{{ post.id  }}">
+                                        <img src="media/{{ post.picture.picture }}" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/post/{{ post.id }}" class="invisible">
+                            <img src="media/{{ post.picture.picture }}" alt="" class="img-responsive">
+                        </a>
+                        <div class="text">
+                            <h3><a href="/post/{{ post.id  }}">{{ post.gift.name }}</a></h3>
+                            <h6>{{ post.region }},{{ post.provincia }},{{ post.comuna }}</h6>
+                        </div>
+                        <!-- /.text -->
+                            </div>
+                    <!-- /.product -->
+                </div>
+                {% endif %}
+                        {% endfor %}
+
+                    </div>
+            <!-- /.product-slider -->
+
+                </div>
+                {% endif %}
+        <!-- /.container -->
+        <div class="box">
+            <div class="container">
+                <div class="col-md-12">
+                    <h2>Los que tienen su último día de postulaciones</h2>
+                </div>
+            </div>
+        </div>
+
+        {% if posts %}
+        <div class="container">
+
+            <div class="product-slider">
+                {% for post in posts %}
+                {% if post.state == True and post.finish_date <= tomorrow and post.finish_date >= today %}
+                <div class="item">
+                    <div class="product">
+                        <div class="flip-container">
+                            <div class="flipper">
+                                <div class="front">
+                                    <a href="/post/{{ post.id }}">
+                                        <img src="media/{{ post.picture.picture }}" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="back">
+                                    <a href="/post/{{ post.id  }}">
+                                        <img src="media/{{ post.picture.picture }}" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/post/{{ post.id }}" class="invisible">
+                            <img src="media/{{ post.picture.picture }}" alt="" class="img-responsive">
+                        </a>
+                        <div class="text">
+                            <h3><a href="/post/{{ post.id  }}">{{ post.gift.name }}</a></h3>
+                            <h6>{{ post.region }},{{ post.provincia }},{{ post.comuna }}</h6>
+                        </div>
+                        <!-- /.text -->
+                    </div>
+                    <!-- /.product -->
+                </div>
+                {% endif %}
+                {% endfor %}
+
+            </div>
+            <!-- /.product-slider -->
+
+        </div>
+        {% endif %}
+
+    </div>
+    <!-- /#hot -->
+
+
+</div>
+
+
+
+
+{% endblock %}

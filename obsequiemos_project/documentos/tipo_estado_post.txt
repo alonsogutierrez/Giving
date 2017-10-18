@@ -1,0 +1,3 @@
+1,Recibiendo postulaciones!,true
+2,Obsequiandose...,true
+3,Obsequiado!,true

@@ -1,0 +1,6 @@
+1,Nuevo,true
+2,Utilizable 100%,true
+3,Se debe arreglar,true
+4,Muy poco uso,true
+5,Mucho uso,true
+6,Uso intermedio,true

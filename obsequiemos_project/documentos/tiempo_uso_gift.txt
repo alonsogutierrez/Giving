@@ -1,0 +1,5 @@
+1,Horas,true
+2,Dias,true
+3,Semanas,true
+4,Meses,true
+5,Años,true

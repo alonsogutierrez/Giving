@@ -1,0 +1,287 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+
+<head>
+    <title>Obsequia!</title>
+    <meta property="fb:app_id" content="2037530789806710"/>
+    <meta property="og:url" content="/post/{{ post.id }}/"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="{{ post.title }}"/>
+    <meta property="og:description" content="{{ post.detail }}"/>
+    <meta property="og:image" content="{{ picture.picture }}"/>
+
+</head>
+
+<div id="content">
+
+    {% if post.state != False %}
+            <div class="container">
+                <div class="col-sm-12">
+
+                    <ul class="breadcrumb">
+
+                        <li><a href="/">Inicio</a>
+                        </li>
+                        <li><strong>Detalles del obsequio</strong></li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-9" id="blog-post">
+
+
+                    <div class="box">
+
+                        <p class="author-date">Publicado por <a href="#">{{ post.user_post.username }}</a> el {{
+                            post.date }}</p>
+
+                        <div id="post-content">
+                            <p><h1>{{ post.title }}</h1></p>
+
+                            <img src="/media/{{ post.picture.picture }}" alt="" class="img-responsive">
+
+                            <h2>Detalles del obsequiador</h2>
+                            <ol>
+                                <li><strong>Ubicación: </strong>{{ post.region }}, {{ post.provincia }}, {{ post.comuna
+                                    }}
+                                </li>
+                                <li><strong>Reputación: </strong>{{ post.user_post.userprofile.avg_reputation }}</li>
+                                <li><strong>Obsequios concretados: </strong>{{ count_success_posts }}</li>
+                                <li><strong>Tipo de obsequiador: </strong>{{ post.user_post.userprofile.type_user }}
+                                </li>
+                                <li><strong>Fecha de registro: </strong>{{ post.user_post.userprofile.register_date }}
+                                </li>
+                            </ol>
+
+                            <h2>Opciones de despacho</h2>
+
+                            <ol>
+                                {% if post.person2person_dispatch == True %}
+                                <li><strong>Entrega persona a persona: </strong>Si</li>
+                                {% endif %}
+                                {% if post.pay_winner_dispatch == True %}
+                                <li><strong>Ganador paga despacho: </strong>Si</li>
+                                {% endif %}
+                                {% if post.giver_pay_dispatch == True %}
+                                <li><strong>Obsequiador paga despacho: </strong>Si</li>
+                                {% endif %}
+                                {% if post.according_to_winner_dispatch == True %}
+                                <li><strong>A acordar con el ganador: </strong>Si</li>
+                                {% endif %}
+                            </ol>
+
+                            <h2>Detalles técnicos del obsequio</h2>
+
+                            <ol>
+                                <li><strong>Nombre:</strong> {{ post.gift.name }}</li>
+                                <li><strong>Categoria:</strong> {{ post.gift.category }}</li>
+                                <li><strong>Subcategoria:</strong> {{ post.gift.subcategory }}</li>
+                                <li><strong>Cantidad de tiempo usado:</strong> {{ post.gift.cant_used_time }}
+                                    {{post.gift.used_time_type }}
+                                </li>
+                                <li><strong>Estado del obsequio:</strong> {{ post.gift.state_type.state_type }}</li>
+                                <li><strong>Largo:</strong> {{ post.gift.length }} {{ post.gift.dimension_type }}</li>
+                                <li><strong>Alto:</strong> {{ post.gift.height }} {{ post.gift.dimension_type }}</li>
+                                <li><strong>Ancho:</strong> {{ post.gift.width }} {{ post.gift.dimension_type }}</li>
+                                <li><strong>Peso:</strong> {{ post.gift.weight }} {{ post.gift.weight_type }}</li>
+                                <li><strong>Fecha final postulaciones:</strong> {{ post.finish_date }}</li>
+                            </ol>
+
+                            <h3>Motivo del obsequio</h3>
+
+                            <p>{{ post.detail }}</p>
+
+                            {% if user.is_authenticated %}
+                            <div>
+                                <div class="fb-share-button"
+                                     data-href="/post/{{ post.id }}/"
+                                     data-layout="button_count">
+                                </div>
+                                <div class="fb-like"
+                                     data-href="/post/{{ post.id }}/"
+                                     data-layout="button_count"
+                                     data-action="like"
+                                     data-show-faces="true">
+                                </div>
+                            </div>
+
+                            {% endif %}
+
+
+
+                        </div>
+                        <!-- /#post-content -->
+
+                        <div id="postulations" data-animate="fadeInUp">
+                            <h4>{{ count_postulations }} Postulacion(es)</h4>
+                            {% for postulation in postulations %}
+
+                            <div class="row comment">
+                                <div class="col-sm-3 col-md-2 text-center-xs">
+                                    <p>
+                                        <img src="media/{{ postulation.user_postulation.userprofile.picture }}" class="img-responsive img-circle" alt="">
+                                    </p>
+                                </div>
+                                <div class="col-sm-9 col-md-10">
+                                    <h5>{{ postulation.user_postulation.username }}</h5>
+                                    <p class="posted"><i class="fa fa-clock-o"></i> {{ postulation.date }}</p>
+                                    <p>{{ postulation.reason }}</p>
+                                    <ul class="menu">
+                                        {% ifequal request.user post.user_post %}
+                                        <a id={{ postulation.id }} class="regalar" href="/post/{{ post.id }}/"><i class="fa fa-gift"></i> Regalar</a>
+                                        <a id={{ postulation.id }} class="seleccionar" href="/post/{{ post.id }}/><i class=" fa fa-user"></i> Seleccionar postulante</a>
+                                        <!--
+                                        <a id={{ postulation.id }} href="#"><i class="fa fa-reply"></i> Responder</a>
+                                        -->
+                                        {% endifequal %}
+
+
+                                    </ul>
+
+                                </div>
+                                s
+                            </div>
+                            {% endfor %}
+                            <!-- /.comment -->
+
+
+
+                        </div>
+                        <!-- /#comments -->
+                        <!-- Usuario postulado no puede volver a postular -->
+                        {% if not postulation_request_user %}
+
+                        {% ifnotequal request.user post.user_post %}
+                            {% if request.user.is_authenticated %}
+                                {% if finish_date == False %}
+                                    <div id="postulation-form" data-animate="fadeInUp">
+
+                                    <h4>Deja tu motivo para postular</h4>
+
+                                        <form id="posts_form" method="post" action="/post/{{ post.id }}/"
+                                              enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="reason"><span class="required"></span>
+                                                    </label>
+                                                    {{ postulation_form.as_p }}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12 text-right">
+                                                <button class="btn btn-primary"><i class="fa fa-comment-o"></i> Postea tu motivo</button>
+                                            </div>
+                                        </div>
+
+
+                                    </form>
+
+                                    </div>
+                                {% else %}
+                                    <div>
+                                        <h4>Han terminado las postulaciones para este regalo, lo sentimos!</h4>
+                                    </div>
+
+                                {% endif %}
+                            {% else %}
+                            <a href="/registro/">Registrate aca!</a>
+                            {% endif %}
+
+                        <!-- /#comment-form -->
+                        {% endifnotequal %}
+                        {% endif %}
+
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /#blog-post -->
+
+
+                {% ifequal request.user post.user_post %}
+                <div class="col-md-3">
+                    <!-- *** BLOG MENU ***
+ _________________________________________________________ -->
+                    <div class="panel panel-default sidebar-menu">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Seleccionados</h3>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <ul class="nav nav-pills nav-stacked">
+                                {% if list_postulation_selected %}
+                                    {% for postulation in list_postulation_selected %}
+                                        {% if postulation.selected == True %}
+                                        <li>
+                                            <ul>
+                                                <a href="/">{{ postulation.user_postulation.username }}</a>
+                                            </ul>
+                                            <ul>
+                                                {{ postulation.reason }}
+                                            </ul>
+                                            <ul>
+                                                <a id={{ postulation.id }} class="regalar" href="/post/{{ post.id }}/">
+                                                    <i class="fa fa-gift"></i> Regalar
+                                                </a>
+                                            </ul>
+                                        </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                <h5>No existen usuarios seleccionados.</h5>
+                                {% endif %}
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!-- /.col-md-3 -->
+
+                    <!-- *** BLOG MENU END *** -->
+                    <!--
+                    <div class="banner">
+                        <a href="#">
+                            <img src="img/banner.jpg" alt="sales 2014" class="img-responsive">
+                        </a>
+                    </div>
+                    -->
+                </div>
+                {% endifequal %}
+
+
+
+            </div>
+    {% else %}
+    <div class="container">
+        <div class="col-sm-12">
+
+            <ul class="breadcrumb">
+
+                <li><a href="/">Inicio</a>
+                </li>
+                <li>Detalles del obsequio</li>
+            </ul>
+        </div>
+
+        <div class="col-sm-9" id="blog-post">
+
+
+            <div class="box">
+
+                <p class="author-date">El obsequio ya ha sido regalado, muchas gracias!</p>
+            </div>
+        </div>
+    </div>
+
+    {% endif%}
+</div>
+
+
+
+
+{% endblock %}

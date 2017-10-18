@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block main %}
+
+<head>
+    <title>Obsequia login!</title>
+</head>
+
+<div id="content">
+
+            <div class="container">
+                <div class="col-md-12">
+
+                    <ul class="breadcrumb">
+                        <li><a href="/">Inicio</a>
+                        </li>
+                        <li>Login</li>
+                    </ul>
+
+                </div>
+
+                <div class="col-md-12">
+                    <div class="box">
+                        <h1>Ingreso</h1>
+                        <p class="social">
+                            <a href="{% url 'social:begin' 'facebook' %}" class="facebook external"
+                               data-animate-hover="shake"><i class="fa fa-facebook"></i></a>
+                            <a href="{% url 'social:begin' 'twitter' %}?next=/" class="twitter external"
+                               data-animate-hover="shake"><i class="fa fa-twitter"></i></a>
+                            <!--
+                            <a href="#" class="instagram external" data-animate-hover="shake"><i class="fa fa-instagram"></i></a>
+                            <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}" class="gplus external" data-animate-hover="shake"><i class="fa fa-google-plus"></i></a>
+                            <a href="#" class="email external" data-animate-hover="shake"><i class="fa fa-envelope"></i></a>
+                            -->
+                        </p>
+
+                        <p class="lead">Ya eres parte de Obsequiemos?</p>
+                        <p class="text-muted">Ingresa para que puedas postular a otros obsequios y además poder subir los tuyos propios para que los demás postulen!.</p>
+
+                        <hr>
+
+                        <form action="/ingreso/" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label>Nombre usuario</label>
+                                <input name="username" type="text" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                                <label>Clave</label>
+                                <input name="password" type="password" class="form-control" value="">
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Entrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+</div>
+
+
+
+
+{% endblock %}

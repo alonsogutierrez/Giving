@@ -1,0 +1,8 @@
+1,Nuevo obsequiador,Usuario con menos de 1 semana en la plataforma
+2,Obsequiador de semanas,Usuario que lleva menos de 1 mes en la plataforma
+3,Obsequiador de meses,Usuario que lleves menos de 6 meses en la plataforma
+4,Obsequiador hace 1 año,Usuario que lleva 1 año dentro de la plataforma
+5,Obsequiador hace 2 años+,Usuario lleva mas de 2 años participando en la plataforma
+6,Obsequiador confiable,Usuario ya ha concretado obsequios
+7,Obsequiador recomendado,Usuario tiene buena reputacion
+8,Obsequiador no confiable,Usuario no tiene buena reputacion

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block main %}
+
+<head>
+    <title>Registrate en Obsequiemos!</title>
+</head>
+
+<div id="content">
+
+            <div class="container">
+                <div class="col-md-12">
+
+                    <ul class="breadcrumb">
+                        <li><a href="/">Inicio</a>
+                        </li>
+                        <li>Nueva cuenta / Registrarse</li>
+                    </ul>
+
+                </div>
+
+                <div class="col-md-12">
+                    <div class="box">
+                        {% if registered %}
+                        <h1>Obequiemos dice:</h1> <strong>Gracias por registrarte!</strong>
+                        <p><a href="/">Regresa a la pagina de inicio.</a></p>
+
+                        {% else %}
+                        <h1>Nueva cuenta</h1>
+
+                        <p class="lead">¿No estas registrado en Obsequiemos aún?</p>
+                        <p>Registrate para recibir obsequios y además obsequiar los tuyos propios! El proceso completo te tomara menos de 1 minuto!</p>
+                        <p class="text-muted">Si tienes alguna pregunta, por favor sientete libre de <a href="/contacto/">contactarnos</a>, nuestro servicio al cliente esta trabajando para ti ;).</p>
+
+                        <hr>
+
+                        <form action="/registro/" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                            <div class="form-group">
+                                <label for="username">Nombre de usuario</label>
+                                {{ user_form.username|add_class:"form-control" }}
+                                {{ user_form.username.errors }}
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                {{ user_form.email|add_class:"form-control" }}
+                                {{ user_form.email.errors }}
+                            </div>
+                            <div class="form-group">
+                                <label for="first_name">Nombres</label>
+                                {{ user_form.first_name|add_class:"form-control" }}
+                                {{ user_form.first_name.errors }}
+                            </div>
+                            <div class="form-group">
+                                <label for="last_name">Apellidos</label>
+                                {{ user_form.last_name|add_class:"form-control" }}
+                                {{ user_form.last_name.errors }}
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Num celular</label>
+                                {{ userprofile_form.phone|add_class:"form-control" }}
+                                {{ userprofile_form.phone.errors }}
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                {{ user_form.password|add_class:"form-control" }}
+                                {{ user_form.password.errors }}
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-user-md"></i>Registrarse!</button>
+                            </div>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+
+
+            </div>
+</div>
+
+
+
+
+{% endblock %}

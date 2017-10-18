@@ -1,0 +1,36 @@
+from django.conf.urls import url
+# from djngo.conf.urls.defaults import *
+from obsequiemos import views
+
+urlpatterns = [
+        url(r'^$', views.index, name='index'),
+        url(r'^ingreso', views.ingreso, name='ingreso'),
+        url(r'^registro', views.registro, name='registro'),
+    url(r'^registra_social', views.registra_social, name='registra_social'),
+        url(r'^obsequiar', views.obsequiar, name='obsequiar'),
+        url(r'^cerrar_sesion', views.cerrar_sesion, name='cerrar_sesion'),
+    # url(r'^cerrar_sesion$', 'django.contrib.auth.views.logout', {'next_page': '/obsequiemos'}, name="user-logout"),
+    url(r'^contacto', views.contacto, name='contacto'),
+        url(r'^quienes_somos', views.quienes_somos, name='quienes_somos'),
+        url(r'^post/(?P<post_id>[\w\-]+)/$', views.post, name='post'),
+    url(r'^profile/$', views.profile, name='profile'),
+    url(r'^post/(?P<post_id>[\w\-]+)/checkout1/', views.checkout1, name='checkout1'),
+    url(r'^ganador', views.ganador, name='ganador'),
+    url(r'^ganador/(?P<id_postulation>[\w\-]+)/$', views.ganador, name='ganador'),
+    url(r'^seleccionado', views.seleccionado, name='seleccionado'),
+    url(r'^post/(?P<post_id>[\w\-]+)/checkout2/$', views.checkout2, name='checkout2'),
+    url(r'^post/(?P<post_id>[\w\-]+)/checkout3/$', views.checkout3, name='checkout3'),
+    url(r'^post/(?P<post_id>[\w\-]+)/checkout4/$', views.checkout4, name='checkout4'),
+    url(r'^post/(?P<post_id>[\w\-]+)/evaluacion/$', views.evaluacion, name='evaluacion'),
+    url(r'^like_post$', views.like_post, name='like_post'),
+    url(r'^get_provincias/', views.get_provincias, name='get_provincias'),
+    url(r'^get_comunas/', views.get_comunas, name='get_comunas'),
+    url(r'^get_subcategories/', views.get_subcategories, name='get_subcategories'),
+    url(r'^post_coincidentes/(?P<busqueda>[\w\-]+)/', views.post_coincidentes, name='post_coincidentes'),
+    url(r'^post_coincidentes/', views.post_coincidentes, name='post_coincidentes'),
+    url(r'^my_gifts/', views.my_gifts, name='my_gifts'),
+    url(r'^my_notifications/', views.my_notifications, name='my_notifications'),
+    url(r'^my_postulations/', views.my_postulations, name='my_postulations'),
+    url(r'^read_notificacion/', views.read_notificacion, name='read_notificacion'),
+    url(r'^faq/', views.faq, name='faq'),
+]

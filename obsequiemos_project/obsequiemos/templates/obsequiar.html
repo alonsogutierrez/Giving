@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+
+{% block main %}
+
+<head>
+    <title>Obsequiemos!</title>
+</head>
+
+<div id="content">
+
+            <div class="container">
+                {% if can_posts == True %}
+
+                <div class="col-md-12">
+                    <div class="box">
+
+                        <h1>Formulario para obsequiar!</h1>
+
+                        <form action="/obsequiar/" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p class="lead"><strong>Detalles del post</strong></p>
+                                <div class="form-group">
+                                        <label for="titulo">Titulo</label>
+                                        {{ post_form.title|add_class:"form-control" }}
+                                        {{ post_form.title.errors }}
+                                </div>
+
+                                <div class="form-group">
+                                        <label for="motivo">Motivo</label>
+                                        {{ post_form.detail|add_class:"form-control" }}
+                                        {{ post_form.detail.errors }}
+                                    </div>
+
+                                <div class="form-group">
+                                    <label for="fechaTermino">Fecha término de postulaciones</label>
+                                        {{ post_form.finish_date|add_class:"form-control" }}
+                                        {{ post_form.finish_date.errors }}
+                                    </div>
+
+                            <p class="lead"><strong>Despacho del obsequio</strong></p>
+                            <div class="form-group">
+                                <label for="despacho"><strong>Seleccionar tipo despacho</strong></label>
+                                <div class="row productos">
+                                    <div class="col-md-3 col-sm-4">
+                                        <label>Entrega en persona</label>
+                                        {{ post_form.person2person_dispatch|add_class:"form-control" }}
+                                        {{ post_form.person2person_dispatch.errors }}
+
+                                    </div>
+                                    <div class="col-md-3 col-sm-4">
+                                        <label>Ganador paga despacho</label>
+                                        {{ post_form.pay_winner_dispatch|add_class:"form-control" }}
+                                        {{ post_form.pay_winner_dispatch.errors }}
+
+                                    </div>
+                                    <div class="col-md-3 col-sm-4">
+                                        <label>Obsequiador paga despacho</label>
+                                        {{ post_form.giver_pay_dispatch|add_class:"form-control" }}
+                                        {{ post_form.giver_pay_dispatch.errors }}
+
+                                    </div>
+                                    <div class="col-md-3 col-sm-4">
+                                        <label>Acordar con ganador</label>
+                                        {{ post_form.according_to_winner_dispatch|add_class:"form-control" }}
+                                        {{ post_form.according_to_winner_dispatch.errors }}
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <br>
+
+                            <p class="lead"><strong>Ubicacion de obsequio</strong></p>
+                                <div class="form-group">
+                                    <label for="region" id="region">Region</label>
+                                        {{ post_form.region|add_class:"form-control" }}
+                                        {{ post_form.region.errors }}
+                                    </div>
+                                <br>
+                            <div class="form-group">
+                                <label for="provincia" id="provincia">Provincia</label>
+                                {{ post_form.provincia|add_class:"form-control" }}
+                                {{ post_form.provincia.errors }}
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="comuna" id="comuna">Comuna</label>
+                                {{ post_form.comuna|add_class:"form-control" }}
+                                {{ post_form.comuna.errors }}
+                            </div>
+                            <br>
+
+
+                            <p class="lead"><strong>Detalles del obsequio</strong></p>
+                                <div class="form-group">
+                                        <label for="nombre">Nombre</label>
+                                        {{ gift_form.name|add_class:"form-control" }}
+                                        {{ gift_form.name.errors }}
+                                    </div>
+                                <div class="form-group">
+                                        <label for="categoria">Categoria</label>
+                                        {{ gift_form.category|add_class:"form-control" }}
+                                        {{ gift_form.category.errors }}
+                                    </div>
+                                <div class="form-group">
+                                    <label for="subcategoria">Subcategoria</label>
+                                    {{ gift_form.subcategory|add_class:"form-control" }}
+                                    {{ gift_form.subcategory.errors }}
+                                    </div>
+                                <div class="form-group">
+                                        <label for="estado_vida">Estado actual del obsequio</label>
+                                        {{ gift_form.state_type|add_class:"form-control" }}
+                                        {{ gift_form.state_type.errors }}
+                                    </div>
+                                <div class="form-group">
+                                    <label for="cant_used_time">Cantidad tiempo usado</label>
+                                    {{ gift_form.cant_used_time|add_class:"form-control" }}
+                                    {{ gift_form.cant_used_time.errors }}
+                                </div>
+                            <div class="form-group">
+                                <label for="used_format">Formato tiempo de uso</label>
+                                {{ gift_form.used_time_type|add_class:"form-control" }}
+                                {{ gift_form.used_time_type.errors }}
+                            </div>
+                            <div class="form-group">
+                                <label for="largo">Largo</label>
+                                {{ gift_form.length|add_class:"form-control" }}
+                                {{ gift_form.length.errors }}
+                            </div>
+                                <div class="form-group">
+                                        <label for="alto">Alto</label>
+                                        {{ gift_form.height|add_class:"form-control" }}
+                                        {{ gift_form.height.errors }}
+                                    </div>
+                                <div class="form-group">
+                                        <label for="ancho">Ancho</label>
+                                        {{ gift_form.width|add_class:"form-control" }}
+                                        {{ gift_form.width.errors }}
+                                    </div>
+                                <div class="form-group">
+                                    <label for="tipo_dimension">Formato de medida</label>
+                                    {{ gift_form.dimension_type|add_class:"form-control" }}
+                                    {{ gift_form.dimension_type.errors }}
+                                </div>
+                            <div class="form-group">
+                                <label for="peso">Peso</label>
+                                {{ gift_form.weight|add_class:"form-control" }}
+                                {{ gift_form.weight.errors }}
+                            </div>
+                                <div class="form-group">
+                                    <label for="type_weight">Unidad de peso</label>
+                                    {{ gift_form.type_weight|add_class:"form-control" }}
+                                    {{ gift_form.type_weight.errors }}
+                                    </div>
+
+
+                            <p class="lead"><strong>Detalles de la foto</strong></p>
+                                <div class="form-group">
+                                        <label for="picture">Foto del obsequio</label>
+                                        {{ picture_form.picture }}
+                                        {{ picture_form.picture.errors }}
+                                </div>
+                                <div class="row">
+                                    <div class="text-center">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Subir obsequio</button>
+
+                                    </div>
+                                </div>
+
+
+                            <!-- /.row -->
+                        </form>
+
+                    </div>
+
+
+
+                </div>
+                {% else %}
+                <h1>Debes llevar más de dos días registrado para poder obsequiar, paciencia porfavor!</h1>
+                {% endif %}
+            </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

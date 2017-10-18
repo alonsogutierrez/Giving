@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block main %}
+
+<head>
+    <title>Obsequiemos!</title>
+</head>
+
+<div id="content">
+    {% ifequal request.user user %}
+    <div class="container">
+
+                <div class="col-md-12">
+
+                    <ul class="breadcrumb">
+                        <li><a href="/">Inicio</a>
+                        </li>
+                        <li>Mis notificaciones</li>
+                    </ul>
+
+                </div>
+
+                <div class="col-md-3">
+                    <!-- *** CUSTOMER MENU ***
+ _________________________________________________________ -->
+                    <div class="panel panel-default sidebar-menu">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Sección de usuario</h3>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <ul class="nav nav-pills nav-stacked">
+
+                                <!--
+                                <li class="active">
+                                    <a href="customer-orders.html"><i class="fa fa-list"></i> Mis postulaciones</a>
+                                </li>
+                                -->
+                                <li >
+                                    <a href="/profile/"><i class="fa fa-user"></i> Mi cuenta</a>
+                                </li>
+                                <li>
+                                    <a href="/my_gifts/"><i class="fa fa-heart"></i> Mis regalos</a>
+                                </li>
+                                <li>
+                                    <a href="/my_postulations/"><i class="fa fa-shopping-cart"></i> Mis postulaciones</a>
+                                </li>
+                                <li class="active">
+                                    <a href="/my_notifications/"><i class="fa fa-list"></i> Mis notificaciones</a>
+                                </li>
+                                <li>
+                                    <a href="/cerrar_sesion/"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!-- /.col-md-3 -->
+
+                    <!-- *** CUSTOMER MENU END *** -->
+                </div>
+
+                <div class="col-md-9">
+                    <div class="box">
+                        <h1>Mis notificaciones</h1>
+                        <p class="lead">Notificaciones sin leer!.</p>
+                        <p class="text-muted">Gracias por ser parte de la comunidad Giving!</p>
+                        <h3>Tus notificaciones</h3>
+                        {% if notifications %}
+                            {% for not in notifications %}
+                                {% if not.open == False %}
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="title">{{ not.title }}</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="lastname"><a class="notificacion" id="{{not.id}} "href="{{not.url}}">Revisar</a></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% else %}
+
+                                {% endif %}
+                            {% endfor %}
+
+                        {% else %}
+                        <h6>No tienes notificaciones por ahora.</h6>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+    </div>
+    <!-- /.container -->
+    {% else %}
+        <h2>Acceso restringido</h2>
+    {% endifequal %}
+</div>
+
+
+
+
+{% endblock %}

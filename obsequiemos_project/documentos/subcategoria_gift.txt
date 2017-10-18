@@ -1,0 +1,36 @@
+1,Libros,true,1
+2,Películas,true,1
+3,Documentales,true,1
+4,Clases,true,1
+5,Otro tipo,true,1
+6,Futbol,true,2
+7,Basquetball,true,2
+8,Tenis,true,2
+9,Artes marciales,true,2
+10,Natación,true,2
+11,Andinismo,true,2
+12,Trekking,true,2
+13,Bailes,true,2
+14,Breakdance,true,2
+15,Running,true,2
+16,Pesca,true,2
+17,Surf,true,2
+18,Bicicleta,true,2
+19,Otros tipos,true,2
+20,Muebles,true,3
+21,Electrodomésticos,true,3
+22,Herramientas y jardinería,true,3
+23,Otros,true,3
+24,Vestuarios,true,4
+25,Bolsos-mochilas-demases,true,4
+26,Salud y estilos,true,4
+27,Calzados,true,4
+28,Otros topos calzados,true,4
+29,Vestuarios bebes y niños,true,5
+30,Juguetes,true,5
+31,Artículos infantiles,true,5
+32,Otros tipos obsequios,true,5
+33,Computadores y accesorios,true,6
+34,Celulares y accesorios,true,6
+35,Videojuegos-consolas,true,6
+36,Audio-TV-vídeo-fotografía,true,6

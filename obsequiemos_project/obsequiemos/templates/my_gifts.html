@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block main %}
+
+<head>
+    <title>Obsequiemos!</title>
+</head>
+
+<div id="content">
+    {% ifequal request.user user %}
+    <div class="container">
+
+        <div class="col-md-12">
+
+            <ul class="breadcrumb">
+                <li><a href="/">Inicio</a>
+                </li>
+                <li>Mis notificaciones</li>
+            </ul>
+
+        </div>
+
+        <div class="col-md-3">
+            <!-- *** CUSTOMER MENU ***
+_________________________________________________________ -->
+            <div class="panel panel-default sidebar-menu">
+
+                <div class="panel-heading">
+                    <h3 class="panel-title">Sección de usuario</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    <ul class="nav nav-pills nav-stacked">
+
+                        <!--
+                        <li class="active">
+                            <a href="customer-orders.html"><i class="fa fa-list"></i> Mis postulaciones</a>
+                        </li>
+                        -->
+                        <li>
+                            <a href="/profile/"><i class="fa fa-user"></i> Mi cuenta</a>
+                        </li>
+                        <li class="active">
+                            <a href="/my_gifts/"><i class="fa fa-heart"></i> Mis regalos</a>
+                        </li>
+                        <li>
+                            <a href="/my_postulations/"><i class="fa fa-shopping-cart"></i> Mis postulaciones</a>
+                        </li>
+                        <li>
+                            <a href="/my_notifications/"><i class="fa fa-list"></i> Mis notificaciones</a>
+                        </li>
+                        <li>
+                            <a href="/cerrar_sesion/"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <!-- /.col-md-3 -->
+
+            <!-- *** CUSTOMER MENU END *** -->
+        </div>
+
+        <div class="col-md-9">
+            <div class="box">
+                <h1>Mis regalos</h1>
+                <p class="lead">Tus obsequios recibidos!.</p>
+                <p class="text-muted">Gracias por ser parte de la comunidad Giving!</p>
+                <h3>Obsequios</h3>
+                {% if my_gifts %}
+                {% for g in my_gifts %}
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="title">{{ g.post_postulation.gift.name }}</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="lastname"><img src="media/{{ g.post_postulation.picture.picture }}" alt=""
+                                                       class="img-responsive"></label>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                {% else %}
+                <h6>No tienes obsequios por ahora.</h6>
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+    {% else %}
+    <h2>Acceso restringido</h2>
+    {% endifequal %}
+</div>
+
+
+{% endblock %}

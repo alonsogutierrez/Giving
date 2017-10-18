@@ -1,0 +1,15 @@
+1,Tarapacá,CL-TA
+2,Antofagasta,CL-AN
+3,Atacama,CL-AT
+4,Coquimbo,CL-CO
+5,Valparaíso,CL-VS
+6,Región del Libertador Gral. Bernardo O’Higgins,CL-LI
+7,Región del Maule,CL-ML
+8,Región del Biobío,CL-BI
+9,Región de la Araucanía,CL-AR
+10,Región de Los Lagos,CL-LL
+11,Región Aisén del Gral. Carlos Ibáñez del Campo,CL-AI
+12,Región de Magallanes y de la Antártica Chilena,CL-MA
+13,Región Metropolitana de Santiago,CL-RM
+14,Región de Los Ríos,CL-LR
+15,Arica y Parinacota,CL-AP

@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block main %}
+
+<head>
+    <title>Obsequiemos!</title>
+</head>
+
+<div id="content">
+
+    <div class="container">
+                {% ifequal request.user user_postulation %}
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="/">Inicio</a>
+                        </li>
+                        <li>Checkout - Envío</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-9" id="checkout">
+
+                    <div class="box">
+                        <form method="post" action="/post/{{ post.id }}/checkout4/">
+                            <h1>Envío</h1>
+                            <ul class="nav nav-pills nav-justified">
+                                <li class="disabled"><a href="#"><i class="fa fa-map-marker"></i><br>Intento de obsequio</a>
+                                </li>
+                                <li class="disabled"><a href="#"><i class="fa fa-truck"></i><br>Método despacho</a>
+                                </li>
+                                <li class="disabled"><a href="#"><i class="fa fa-money"></i><br>Método pago</a>
+                                </li>
+                                <li class="active"><a href="#"><i class="fa fa-eye"></i><br>Revisar obsequio</a>
+                                </li>
+                            </ul>
+
+                            <div class="content">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2">Obsequio</th>
+                                                <th>Nombre</th>
+                                                <th>Categoría</th>
+                                                <th>Subcategoría</th>
+                                                <th>Tiempo de uso</th>
+                                                <th>Estado obsequio</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <a href="#">
+                                                        <img src="img/detailsquare.jpg" alt={{ gift.category.ame_category }}>
+                                                    </a>
+                                                </td>
+                                                <td><a href="#">{{ gift.name }}</a>
+                                                </td>
+                                                <td>{{ gift.name }}</td>
+                                                <td>{{ gift.category.name_category }}</td>
+                                                <td>{{ gift.subcategory.name_subcategory }}</td>
+                                                <td>{{ gift.cant_used_time}} {{ gift.used_time_type.time_type }}</td>
+                                                <td>{{ gift.state_type.state_type }} </td>
+                                            </tr>
+                                        </tbody>
+                                        <!--
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="5">Total</th>
+                                                <th>$446.00</th>
+                                            </tr>
+                                        </tfoot>
+                                        -->
+                                    </table>
+
+                                </div>
+                                <!-- /.table-responsive -->
+                            </div>
+                            <!-- /.content -->
+                            {% csrf_token %}
+                            <div class="box-footer">
+                                <div class="pull-left">
+                                    <a href="/post/{{ post.id }}/checkout3/" class="btn btn-default"><i class="fa fa-chevron-left"></i>Volver</a>
+                                </div>
+                                <div class="pull-right">
+                                    <button type="submit" class="btn btn-primary" href="/post/{{ post.id }}/evaluacion/">Confirmar despacho de obsequio<i class="fa fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box -->
+
+
+                </div>
+                <!-- /.col-md-9 -->
+
+                <div class="col-md-3">
+
+                    <div class="box" id="order-summary">
+                        <div class="box-header">
+                            <h3>Resumen obsequio</h3>
+                        </div>
+                        <p class="text-muted">Si vas a pagar costos de envío, asegurate que tu obsequiador sea confiable, para evitar problemas.</p>
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>Nombre obsequio</td>
+                                        <th>{{ gift.name }}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Estado del obsequio</td>
+                                        <th>{{ gift.state_type.state_type }}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Peso</td>
+                                        <th>{{ gift.weight }} {{ gift.weight_type }}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Largo</td>
+                                        <th>{{ gift.height }} {{ gift.dimension_type }}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Alto</td>
+                                        <th>{{ gift.length }} {{ gift.dimension_type }}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Ancho</td>
+                                        <th>{{ gift.width }} {{ gift.dimension_type }}</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+                {% else %}
+                <h3>Lo sentimos, acceso restringido!</h3>
+                {% endifequal %}
+                <!-- /.col-md-3 -->
+
+            </div>
+            <!-- /.container -->
+
+
+</div>
+
+
+
+
+{% endblock %}

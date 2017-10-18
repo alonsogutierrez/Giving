@@ -1,0 +1,3 @@
+1,Persona a persona,true
+2,Ganador paga despacho,true
+3,Obsequiador paga despacho,true

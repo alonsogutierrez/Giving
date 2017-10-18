@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block main %}
+
+<head>
+    <title>Obsequiemos!</title>
+</head>
+
+<div id="content">
+
+    <div class="container">
+
+                <div class="col-md-3">
+                    <!-- *** MENUS AND FILTERS ***
+ _________________________________________________________ -->
+
+
+                    <div class="panel panel-default sidebar-menu">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Filtrar por ubicación <a class="btn btn-xs btn-danger pull-right" href="#"><i class="fa fa-times-circle"></i> Limpiar</a></h3>
+                        </div>
+
+                        <div class="panel-body">
+                            <form action="/post_coincidentes/?busqueda={{busq}}" method="post" enctype="multipart/form-data">
+                               {% csrf_token %}
+                                <div class="form-group">
+                                    <p class="lead"><strong>Ubicación de obsequio</strong></p>
+                                    <div class="form-group">
+                                        <label for="region" id="region">Region</label>
+                                        {{ post_form.region|add_class:"form-control" }}
+                                        {{ post_form.region.errors }}
+                                    </div>
+                                    <div class="form-group">
+                                            <label for="provincia" id="provincia">Provincia</label>
+                                            {{ post_form.provincia|add_class:"form-control" }}
+                                            {{ post_form.provincia.errors }}
+                                        </div>
+                                    <br>
+                                    <div class="form-group">
+                                            <label for="comuna" id="comuna">Comuna</label>
+                                            {{ post_form.comuna|add_class:"form-control" }}
+                                            {{ post_form.comuna.errors }}
+                                        </div>
+                                    <br>
+                                </div>
+
+                                <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Filtrar</button>
+
+                            </form>
+
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default sidebar-menu">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Filtrar por categoría <a class="btn btn-xs btn-danger pull-right" href="#"><i class="fa fa-times-circle"></i> Limpiar</a></h3>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                <form action="/post_coincidentes/?busqueda={{busq}}" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="categoria" id="categoria">Categoria</label>
+                                        {{ gift_form.category|add_class:"form-control" }}
+                                        {{ gift_form.category.errors }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="subcategoria" id="subcategoria">Subcategoria</label>
+                                        {{ gift_form.subcategory|add_class:"form-control" }}
+                                        {{ gift_form.subcategory.errors }}
+                                    </div>
+
+                                    <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Filtrar</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <!-- *** MENUS AND FILTERS END *** -->
+
+
+                </div>
+
+                <div class="col-md-9">
+                    <div class="box info-bar">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 products-showing">
+                                Mostrando <strong>{{ posts_count }}</strong> de <strong>{{ posts_count }}</strong> regalos
+                            </div>
+                            <!--
+                            <div class="col-sm-12 col-md-8  products-number-sort">
+                                <div class="row">
+                                    <form class="form-inline">
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="products-number">
+                                                <strong>Mostrar</strong>  <a href="#" class="btn btn-default btn-sm btn-primary">12</a>  <a href="#" class="btn btn-default btn-sm">24</a>  <a href="#" class="btn btn-default btn-sm">Todos</a> regalos
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="products-sort-by">
+                                                <strong>Ordenar por</strong>
+                                                <select name="sort-by" class="form-control">
+                                                    <option>Años de uso</option>
+                                                    <option>Peso</option>
+                                                    <option>Tamaño</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            -->
+                        </div>
+                    </div>
+
+                    <div class="row products">
+                    {% for post in posts %}
+                    {% if post.state == True %}
+                        <div class="col-md-4 col-sm-6" >
+                            <div class="product">
+                                <div class="flip-container">
+                                    <div class="flipper">
+                                        <div class="front">
+                                            <a href="/post/{{ post.id }}">
+                                                <img src="/media/{{ post.picture.picture }}" alt="" class="img-responsive">
+                                            </a>
+                                        </div>
+                                        <div class="back">
+                                            <a href="/post/{{ post.id }}">
+                                                <img src="/media/{{ post.picture.picture }}" alt="" class="img-responsive">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="/post/{{ post.id }}" class="invisible">
+                                    <img src="/media/{{ post.picture.picture }}" alt="" class="img-responsive">
+                                </a>
+                                <div class="text">
+                                    <h3><a href="/post/{{ post.id }}">{{ post.title }}</a></h3>
+                                    <h5>{{ post.region }}, {{ post.provincia }}, {{ post.comuna }}</h5>
+                                    <p class="buttons">
+                                        <a href="/post/{{ post.id }}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Postular</a>
+                                    </p>
+                                </div>
+                                <!-- /.text -->
+                            </div>
+                            <!-- /.product -->
+                        </div>
+                    {% endif %}
+                    {% endfor %}
+                    </div>
+                    <!-- /.products -->
+
+                    <!--
+                    <div class="pages">
+
+                        <p class="loadMore">
+                            <a href="#" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i> Cargar más</a>
+                        </p>
+
+                        <ul class="pagination">
+                            <li><a href="#">&laquo;</a>
+                            </li>
+                            <li class="active"><a href="#">1</a>
+                            </li>
+                            <li><a href="#">2</a>
+                            </li>
+                            <li><a href="#">3</a>
+                            </li>
+                            <li><a href="#">4</a>
+                            </li>
+                            <li><a href="#">5</a>
+                            </li>
+                            <li><a href="#">&raquo;</a>
+                            </li>
+                        </ul>
+                    </div>
+                    -->
+
+
+                </div>
+                <!-- /.col-md-9 -->
+    </div>
+
+
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block main %}
+
+<head>
+    <title>Obsequiemos!</title>
+</head>
+
+<div id="content">
+    {% ifequal request.user user %}
+    <div class="container">
+
+        <div class="col-md-12">
+
+            <ul class="breadcrumb">
+                <li><a href="/">Inicio</a>
+                </li>
+                <li>Mi cuenta</li>
+            </ul>
+
+        </div>
+
+        <div class="col-md-3">
+            <!-- *** CUSTOMER MENU ***
+_________________________________________________________ -->
+            <div class="panel panel-default sidebar-menu">
+
+                <div class="panel-heading">
+                    <h3 class="panel-title">Sección de usuario</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    <ul class="nav nav-pills nav-stacked">
+
+                        <!--
+                        <li class="active">
+                            <a href="customer-orders.html"><i class="fa fa-list"></i> Mis postulaciones</a>
+                        </li>
+                        -->
+                        <li class="active">
+                            <a href="/profile/"><i class="fa fa-user"></i> Mi cuenta</a>
+                        </li>
+                        <li>
+                            <a href="/my_gifts/"><i class="fa fa-heart"></i> Mis regalos</a>
+                        </li>
+                        <li>
+                            <a href="/my_postulations/"><i class="fa fa-shopping-cart"></i> Mis postulaciones</a>
+                        </li>
+                        <li>
+                            <a href="/my_notifications/"><i class="fa fa-list"></i> Mis notificaciones</a>
+                        </li>
+                        <li>
+                            <a href="/cerrar_sesion/"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <!-- /.col-md-3 -->
+
+            <!-- *** CUSTOMER MENU END *** -->
+        </div>
+
+        <div class="col-md-9">
+            <div class="box">
+                <h1>Mi cuenta</h1>
+                <p class="lead">Cambia tu contraseña o tu información personal aquí.</p>
+                <p class="text-muted">Gracias por ser parte de la comunidad Giving!</p>
+
+                <!--
+
+                <h3>Cambio de contraseña</h3>
+
+                <form action="/profile/" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="password_old" id="id_password_old">Antigua contraseña</label>
+                                {{ change_password_form.password|add_class:"form-control" }}
+                                {{ change_password_form.password.errors }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="password_1">Nueva contraseña</label>
+                                {{ change_password_form.confirm_password|add_class:"form-control" }}
+                                {{ change_password_form.confirm_password.errors }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="password_2">Reescribir nueva contraseña</label>
+                                {{ change_password_form.current_password|add_class:"form-control" }}
+                                {{ change_password_form.current_password.errors }}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                <!--
+                    <div class="col-sm-12 text-center">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar nueva contraseña</button>
+                    </div>
+                </form>
+
+                <hr>
+                -->
+
+                <h3>Detalles personales</h3>
+                <form action="/profile/" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="firstname">Nombres</label>
+                                <input type="text" class="form-control" name="firstname" id="firstname"
+                                       value="{{user.first_name}}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="lastname">Apellidos</label>
+                                <input type="text" class="form-control" name="lastname" id="lastname"
+                                       value="{{user.last_name}}">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="phone">Teléfono</label>
+                                <input type="text" class="form-control" name="phone" id="phone"
+                                       value="{{user_profile.phone}}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" name="email" id="email" value="{{user.email}}">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="phone">Imagen de perfil</label>
+                                <img src="/media/{{ user_profile.picture }}" class="img-responsive img-circle" alt="">
+                                <!-- /media/{{ post.picture.picture }} -->
+                                {{ picture_form.picture }}
+                                {{ picture_form.picture.errors }}
+                            </div>
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar cambios
+                            </button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+    {% else %}
+    <h2>Acceso restringido</h2>
+    {% endifequal %}
+</div>
+
+
+{% endblock %}

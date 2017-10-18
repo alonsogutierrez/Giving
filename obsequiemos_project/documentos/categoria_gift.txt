@@ -1,0 +1,6 @@
+1,Conocimiento,true
+2,Deportes,true
+3,Hogar,true
+4,Moda-Calzados,true
+5,Futura madre,true
+6,Computación-Electrónica,true
